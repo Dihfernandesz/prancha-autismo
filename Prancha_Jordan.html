@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minha Prancha de Comunicação</title>
+    <style>
+        /* CONFIGURAÇÕES GERAIS */
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 5px 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        /* GRID RESPONSIVO */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 colunas */
+            grid-gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        /* ESTILO DOS CARDS */
+        .card {
+            background-color: white; /* Fallback */
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between; /* Distribui espaço entre img e texto */
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.1s, box-shadow 0.1s;
+            border: 4px solid white;
+            padding: 10px;
+            height: 160px; /* Altura fixa */
+            overflow: hidden;
+            
+            /* Previne seleção */
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .card:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            filter: brightness(0.9);
+        }
+
+        /* ESTILO DA IMAGEM */
+        .card-img {
+            width: 100%;
+            height: 90px; /* Altura reservada para imagem */
+            object-fit: contain; /* Ajusta a imagem sem distorcer */
+            pointer-events: none;
+            filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.1));
+        }
+
+        /* TEXTO */
+        .label {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            margin-top: 5px;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        /* --- CORES DE FUNDO DOS CARDS --- */
+        .sim { background-color: #4CAF50; }
+        .nao { background-color: #F44336; }
+        .trakinas { background-color: #E91E63; }
+        .yokitos { background-color: #FF9800; } 
+        .coca { background: linear-gradient(135deg, #b71c1c 60%, #1a1a1a 60%); }
+        .agua { background-color: #2196F3; }
+        .xixi { background-color: #FFEB3B; }
+        /* Texto escuro para o amarelo */
+        .xixi .label { color: #444; text-shadow: none; } 
+        .coco { background-color: #795548; }
+
+    </style>
+</head>
+<body>
+
+    <h1>Minha Prancha</h1>
+
+    <div class="grid-container">
+        
+        <div class="card sim" onclick="falar('Sim')">
+            <img src="Imagens/sim.png" alt="Sim" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/148/148767.png'">
+            <span class="label">Sim</span>
+        </div>
+
+        <div class="card nao" onclick="falar('Não')">
+            <img src="Imagens/nao.png" alt="Não" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png'">
+            <span class="label">Não</span>
+        </div>
+
+        <div class="card xixi" onclick="falar('Quero fazer xixi')">
+            <img src="Imagens/xixi.png" alt="Xixi" class="card-img">
+            <span class="label">Xixi</span>
+        </div>
+
+        <div class="card coco" onclick="falar('Quero fazer cocô')">
+            <img src="Imagens/cocô.png" alt="Cocô" class="card-img">
+            <span class="label">Cocô</span>
+        </div>
+
+        <div class="card agua" onclick="falar('Quero água')">
+            <img src="Imagens/agua.jpg" alt="Água" class="card-img">
+            <span class="label">Água</span>
+        </div>
+
+         <div class="card coca" onclick="falar('Quero Coca Cola')">
+            <img src="Imagens/coca.jpg" alt="Coca Cola" class="card-img">
+            <span class="label">Coca Cola</span>
+        </div>
+
+        <div class="card trakinas" onclick="falar('Quero bolacha Trakinas')">
+            <img src="Imagens/trakinas.png" alt="Trakinas" class="card-img">
+            <span class="label">Trakinas</span>
+        </div>
+
+        <div class="card yokitos" onclick="falar('Quero salgadinho cebola')">
+            <img src="Imagens/yokitos.jpg" alt="Salgadinho" class="card-img">
+            <span class="label">Salgadinho</span>
+        </div>
+
+    </div>
+
+    <script>
+        // Função de fala aprimorada
+        function falar(texto) {
+            if ('speechSynthesis' in window) {
+                // Cancela fala anterior
+                window.speechSynthesis.cancel();
+                
+                const mensagem = new SpeechSynthesisUtterance();
+                mensagem.text = texto;
+                mensagem.lang = 'pt-BR';
+                mensagem.rate = 1.1; // Um pouco mais rápido para ficar natural
+                mensagem.pitch = 1.0;
+
+                // Tenta pegar vozes do sistema
+                const vozes = window.speechSynthesis.getVoices();
+                
+                // Prioriza vozes da Google ou Microsoft em PT-BR que são mais naturais
+                const vozPreferida = vozes.find(voz => 
+                    (voz.name.includes('Google') || voz.name.includes('Microsoft')) && 
+                    voz.lang.includes('pt-BR')
+                );
+
+                if (vozPreferida) {
+                    mensagem.voice = vozPreferida;
+                }
+
+                window.speechSynthesis.speak(mensagem);
+            }
+        }
+
+        // Garante carregamento das vozes (fix para Chrome/Android)
+        window.speechSynthesis.onvoiceschanged = () => {
+             console.log("Vozes do sistema carregadas.");
+        };
+    </script>
+</body>
+</html>
