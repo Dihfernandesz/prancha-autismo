@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Minha Prancha de Comunicação</title>
+    <title>Prancha do Jordan</title>
     <style>
         /* CONFIGURAÇÕES GERAIS */
         body {
@@ -20,7 +20,7 @@
         h1 {
             text-align: center;
             color: #333;
-            margin: 5px 0 10px 0;
+            margin: 5px 0 15px 0;
             font-size: 1.2rem;
         }
 
@@ -29,26 +29,25 @@
             display: grid;
             grid-template-columns: 1fr 1fr; /* 2 colunas */
             grid-gap: 15px;
-            padding-bottom: 20px;
+            padding-bottom: 40px; /* Espaço extra no final para scroll */
         }
 
         /* ESTILO DOS CARDS */
         .card {
-            background-color: white; /* Fallback */
+            background-color: white;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between; /* Distribui espaço entre img e texto */
+            justify-content: space-between;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             transition: transform 0.1s, box-shadow 0.1s;
             border: 4px solid white;
-            padding: 10px;
-            height: 160px; /* Altura fixa */
+            padding: 8px;
+            height: 150px; /* Levemente menor para caber mais na tela */
             overflow: hidden;
             
-            /* Previne seleção */
             user-select: none;
             -webkit-user-select: none;
             -webkit-tap-highlight-color: transparent;
@@ -63,41 +62,52 @@
         /* ESTILO DA IMAGEM */
         .card-img {
             width: 100%;
-            height: 90px; /* Altura reservada para imagem */
-            object-fit: contain; /* Ajusta a imagem sem distorcer */
+            height: 90px;
+            object-fit: contain;
             pointer-events: none;
-            filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.1));
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
         }
 
         /* TEXTO */
         .label {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: white;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
             text-transform: uppercase;
             margin-top: 5px;
             text-align: center;
-            line-height: 1.1;
+            line-height: 1.0;
         }
 
-        /* --- CORES DE FUNDO DOS CARDS --- */
-        .sim { background-color: #4CAF50; }
-        .nao { background-color: #F44336; }
-        .trakinas { background-color: #E91E63; }
-        .yokitos { background-color: #FF9800; } 
-        .coca { background: linear-gradient(135deg, #b71c1c 60%, #1a1a1a 60%); }
-        .agua { background-color: #2196F3; }
-        .xixi { background-color: #FFEB3B; }
-        /* Texto escuro para o amarelo */
+        /* --- CORES DE FUNDO --- */
+        
+        /* Comunicação e Necessidades */
+        .sim { background-color: #4CAF50; } /* Verde */
+        .nao { background-color: #F44336; } /* Vermelho */
+        .xixi { background-color: #FFEB3B; } /* Amarelo */
         .xixi .label { color: #444; text-shadow: none; } 
-        .coco { background-color: #795548; }
+        .coco { background-color: #795548; } /* Marrom */
+        .dormir { background-color: #3F51B5; } /* Azul Noite */
+
+        /* Comidas e Bebidas */
+        .agua { background-color: #2196F3; } /* Azul */
+        .coca { background: linear-gradient(135deg, #b71c1c 60%, #1a1a1a 60%); } /* Coca */
+        .trakinas { background-color: #E91E63; } /* Rosa */
+        .yokitos { background-color: #FF9800; } /* Laranja */
+        .toddynho { background-color: #5D4037; } /* Chocolate */
+
+        /* Lazer e Brincadeiras */
+        .hotwheels { background-color: #FF3D00; } /* Laranja Fogo */
+        .piscina { background-color: #00BCD4; } /* Azul Piscina/Cyan */
+        .rua { background-color: #607D8B; } /* Cinza Azulado (Asfalto/Céu) */
+        .pracinha { background-color: #8BC34A; } /* Verde Claro (Grama) */
 
     </style>
 </head>
 <body>
 
-    <h1>Minha Prancha</h1>
+    <h1>Prancha do Jordan</h1>
 
     <div class="grid-container">
         
@@ -121,12 +131,22 @@
             <span class="label">Cocô</span>
         </div>
 
+        <div class="card dormir" onclick="falar('Quero dormir')">
+            <img src="Imagens/dormir.png" alt="Dormir" class="card-img">
+            <span class="label">Dormir</span>
+        </div>
+
         <div class="card agua" onclick="falar('Quero água')">
             <img src="Imagens/agua.jpg" alt="Água" class="card-img">
             <span class="label">Água</span>
         </div>
 
-         <div class="card coca" onclick="falar('Quero Coca Cola')">
+        <div class="card toddynho" onclick="falar('Quero toddynho')">
+            <img src="Imagens/italakinho.png" alt="Toddynho" class="card-img">
+            <span class="label">Toddynho</span>
+        </div>
+
+        <div class="card coca" onclick="falar('Quero Coca Cola')">
             <img src="Imagens/coca.jpg" alt="Coca Cola" class="card-img">
             <span class="label">Coca Cola</span>
         </div>
@@ -141,41 +161,54 @@
             <span class="label">Salgadinho</span>
         </div>
 
+        <div class="card hotwheels" onclick="falar('Quero brincar de hotuíls')">
+            <img src="Imagens/hotwheels.png" alt="Hotwheels" class="card-img">
+            <span class="label">Carrinho</span>
+        </div>
+
+        <div class="card piscina" onclick="falar('Quero ir na piscina')">
+            <img src="Imagens/piscina.png" alt="Piscina" class="card-img">
+            <span class="label">Piscina</span>
+        </div>
+
+        <div class="card pracinha" onclick="falar('Quero ir na pracinha')">
+            <img src="Imagens/pracinha.png" alt="Pracinha" class="card-img">
+            <span class="label">Pracinha</span>
+        </div>
+
+        <div class="card rua" onclick="falar('Quero brincar na rua')">
+            <img src="Imagens/brincando_rua.jpg" alt="Rua" class="card-img">
+            <span class="label">Rua</span>
+        </div>
+
     </div>
 
     <script>
-        // Função de fala aprimorada
         function falar(texto) {
             if ('speechSynthesis' in window) {
-                // Cancela fala anterior
-                window.speechSynthesis.cancel();
+                window.speechSynthesis.cancel(); // Para fala anterior
                 
                 const mensagem = new SpeechSynthesisUtterance();
                 mensagem.text = texto;
                 mensagem.lang = 'pt-BR';
-                mensagem.rate = 1.1; // Um pouco mais rápido para ficar natural
+                mensagem.rate = 1.1; 
                 mensagem.pitch = 1.0;
 
-                // Tenta pegar vozes do sistema
                 const vozes = window.speechSynthesis.getVoices();
-                
-                // Prioriza vozes da Google ou Microsoft em PT-BR que são mais naturais
+                // Tenta achar voz Google ou Microsoft
                 const vozPreferida = vozes.find(voz => 
                     (voz.name.includes('Google') || voz.name.includes('Microsoft')) && 
                     voz.lang.includes('pt-BR')
                 );
 
-                if (vozPreferida) {
-                    mensagem.voice = vozPreferida;
-                }
+                if (vozPreferida) mensagem.voice = vozPreferida;
 
                 window.speechSynthesis.speak(mensagem);
             }
         }
 
-        // Garante carregamento das vozes (fix para Chrome/Android)
         window.speechSynthesis.onvoiceschanged = () => {
-             console.log("Vozes do sistema carregadas.");
+             console.log("Vozes carregadas.");
         };
     </script>
 </body>
